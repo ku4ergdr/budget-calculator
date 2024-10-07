@@ -1,135 +1,119 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="ru">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2487.6">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Helvetica Neue'}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Helvetica Neue'; min-height: 15.0px}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рассчет бюджета</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        h2 {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="ru"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Рассчет бюджета&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-family: Arial, sans-serif;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin: 50px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.container {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>max-width: 400px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin: 0 auto;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border: 1px solid #ccc;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>label {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: block;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>input, button {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border: 1px solid #ccc;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 5px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>h2 {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="container"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;h2&gt;Калькулятор бюджета&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label for="salary"&gt;Введите вашу зарплату (руб):&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="number" id="salary" placeholder="30000"&gt;</p>
-<p class="p2"><span class="Apple-converted-space">        </span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label for="payday"&gt;Дата следующей зарплаты:&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="date" id="payday"&gt;</p>
-<p class="p2"><span class="Apple-converted-space">        </span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label for="spent"&gt;Сколько вы потратили сегодня (руб):&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="number" id="spent" placeholder="0"&gt;</p>
-<p class="p2"><span class="Apple-converted-space">        </span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;button onclick="calculateBudget()"&gt;Рассчитать бюджет&lt;/button&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;h3 id="daily-limit"&gt;Дневной лимит: &lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;h3 id="remaining"&gt;Остаток: &lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>let totalSpent = 0;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>let salary = 0;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>let dailyLimit = 0;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>let remaining = 0;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>// Загружаем данные из localStorage при загрузке страницы</p>
-<p class="p1"><span class="Apple-converted-space">        </span>window.onload = function() {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (localStorage.getItem("salary")) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>salary = parseFloat(localStorage.getItem("salary"));</p>
-<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById("salary").value = salary;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p2"><span class="Apple-converted-space">            </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (localStorage.getItem("payday")) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>let payday = localStorage.getItem("payday");</p>
-<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById("payday").value = payday;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (localStorage.getItem("totalSpent")) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>totalSpent = parseFloat(localStorage.getItem("totalSpent"));</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (salary &amp;&amp; document.getElementById("payday").value) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>calculateBudget(true);<span class="Apple-converted-space">  </span>// Обновляем бюджет с учётом сохранённых данных</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>// Функция для расчета бюджета</p>
-<p class="p1"><span class="Apple-converted-space">        </span>function calculateBudget(skipSpend = false) {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>salary = parseFloat(document.getElementById("salary").value);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>let payday = new Date(document.getElementById("payday").value);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>let spentToday = parseFloat(document.getElementById("spent").value);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>let today = new Date();</p>
-<p class="p2"><span class="Apple-converted-space">            </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>// Рассчитываем количество оставшихся дней до зарплаты</p>
-<p class="p1"><span class="Apple-converted-space">            </span>let totalDays = Math.ceil((payday - today) / (1000 * 60 * 60 * 24));</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>// Проверяем, что пользователь ввел правильные значения</p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (isNaN(salary) || totalDays &lt;= 0) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>alert("Пожалуйста, введите правильные значения.");</p>
-<p class="p1"><span class="Apple-converted-space">                </span>return;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>// Сохраняем зарплату и дату следующей зарплаты в localStorage</p>
-<p class="p1"><span class="Apple-converted-space">            </span>localStorage.setItem("salary", salary);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>localStorage.setItem("payday", document.getElementById("payday").value);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>// Если мы не пропускаем ввод расходов, добавляем потраченную сегодня сумму</p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (!skipSpend &amp;&amp; !isNaN(spentToday)) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>totalSpent += spentToday;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>localStorage.setItem("totalSpent", totalSpent);<span class="Apple-converted-space">  </span>// Сохраняем общие расходы</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>// Рассчитываем остаток и дневной лимит</p>
-<p class="p1"><span class="Apple-converted-space">            </span>remaining = salary - totalSpent;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>dailyLimit = remaining / totalDays;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>// Обновляем отображаемую информацию</p>
-<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById("daily-limit").textContent = "Дневной лимит: " + dailyLimit.toFixed(2) + " руб.";</p>
-<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById("remaining").textContent = "Остаток: " + remaining.toFixed(2) + " руб.";</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>// Обнуляем поле ввода трат</p>
-<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById("spent").value = '';</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+    <div class="container">
+        <h2>Калькулятор бюджета</h2>
+        <label for="salary">Введите вашу зарплату (руб):</label>
+        <input type="number" id="salary" placeholder="30000">
+        
+        <label for="payday">Дата следующей зарплаты:</label>
+        <input type="date" id="payday">
+        
+        <label for="spent">Сколько вы потратили сегодня (руб):</label>
+        <input type="number" id="spent" placeholder="0">
+        
+        <button onclick="calculateBudget()">Рассчитать бюджет</button>
+
+        <h3 id="daily-limit">Дневной лимит: </h3>
+        <h3 id="remaining">Остаток: </h3>
+    </div>
+
+    <script>
+        let totalSpent = 0;
+        let salary = 0;
+        let dailyLimit = 0;
+        let remaining = 0;
+
+        // Загружаем данные из localStorage при загрузке страницы
+        window.onload = function() {
+            if (localStorage.getItem("salary")) {
+                salary = parseFloat(localStorage.getItem("salary"));
+                document.getElementById("salary").value = salary;
+            }
+            
+            if (localStorage.getItem("payday")) {
+                let payday = localStorage.getItem("payday");
+                document.getElementById("payday").value = payday;
+            }
+
+            if (localStorage.getItem("totalSpent")) {
+                totalSpent = parseFloat(localStorage.getItem("totalSpent"));
+            }
+
+            if (salary && document.getElementById("payday").value) {
+                calculateBudget(true);  // Обновляем бюджет с учётом сохранённых данных
+            }
+        };
+
+        // Функция для расчета бюджета
+        function calculateBudget(skipSpend = false) {
+            salary = parseFloat(document.getElementById("salary").value);
+            let payday = new Date(document.getElementById("payday").value);
+            let spentToday = parseFloat(document.getElementById("spent").value);
+            let today = new Date();
+            
+            // Рассчитываем количество оставшихся дней до зарплаты
+            let totalDays = Math.ceil((payday - today) / (1000 * 60 * 60 * 24));
+
+            // Проверяем, что пользователь ввел правильные значения
+            if (isNaN(salary) || totalDays <= 0) {
+                alert("Пожалуйста, введите правильные значения.");
+                return;
+            }
+
+            // Сохраняем зарплату и дату следующей зарплаты в localStorage
+            localStorage.setItem("salary", salary);
+            localStorage.setItem("payday", document.getElementById("payday").value);
+
+            // Если мы не пропускаем ввод расходов, добавляем потраченную сегодня сумму
+            if (!skipSpend && !isNaN(spentToday)) {
+                totalSpent += spentToday;
+                localStorage.setItem("totalSpent", totalSpent);  // Сохраняем общие расходы
+            }
+
+            // Рассчитываем остаток и дневной лимит
+            remaining = salary - totalSpent;
+            dailyLimit = remaining / totalDays;
+
+            // Обновляем отображаемую информацию
+            document.getElementById("daily-limit").textContent = "Дневной лимит: " + dailyLimit.toFixed(2) + " руб.";
+            document.getElementById("remaining").textContent = "Остаток: " + remaining.toFixed(2) + " руб.";
+
+            // Обнуляем поле ввода трат
+            document.getElementById("spent").value = '';
+        }
+    </script>
 </body>
 </html>
