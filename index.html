@@ -106,7 +106,12 @@
             // Рассчитываем остаток и дневной лимит
             remaining = salary - totalSpent;
             dailyLimit = remaining / totalDays;
-
+            
+            // Проверка на перерасход
+            if (spentToday > dailyLimit) {
+                alert("Внимание! Вы потратили больше, чем дневной лимит.");
+            }
+            
             // Обновляем отображаемую информацию
             document.getElementById("daily-limit").textContent = "Дневной лимит: " + dailyLimit.toFixed(2) + " руб.";
             document.getElementById("remaining").textContent = "Остаток: " + remaining.toFixed(2) + " руб.";
