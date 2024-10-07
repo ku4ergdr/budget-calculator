@@ -195,6 +195,31 @@
             chart.data.labels = expenseHistory.map(e => e.date);
             chart.data.datasets[0].data = expenseHistory.map(e => e.amount);
             chart.update();
+
+            // Функция для сброса данных и обновления приложения
+            function resetApp() {
+                // Удаляем все сохранённые данные
+                localStorage.removeItem('salary');
+                localStorage.removeItem('payday');
+                localStorage.removeItem('totalSpent');
+                localStorage.removeItem('expenseHistory');
+                localStorage.removeItem('currency');
+                
+                // Сбрасываем переменные
+                totalSpent = 0;
+                salary = 0;
+                dailyLimit = 0;
+                remaining = 0;
+                expenseHistory = [];
+
+                // Обновляем поля и интерфейс
+                document.getElementById("salary").value = '';
+                document.getElementById("payday").value = '';
+                document.getElementById("spent").value = '';
+                document.getElementById("daily-limit").textContent = 'Дневной лимит: ';
+                document.getElementById("remaining").textContent = 'Остаток: ';
+                document.getElementById("expense-history").innerHTML = '';
+}
         }
     </script>
 </body>
