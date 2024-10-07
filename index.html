@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Рассчет бюджета</title>
+    <title>Калькулятор бюджета</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Подключение Chart.js -->
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 50px;
         }
         .container {
-            max-width: 400px;
+            max-width: 600px;
             margin: 0 auto;
             padding: 20px;
             border: 1px solid #ccc;
@@ -20,7 +21,7 @@
             display: block;
             margin-bottom: 10px;
         }
-        input, button {
+        input, button, select {
             width: 100%;
             padding: 10px;
             margin-bottom: 20px;
@@ -30,24 +31,41 @@
         h2 {
             text-align: center;
         }
+        canvas {
+            margin: 20px auto;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h2>Калькулятор бюджета</h2>
-        <label for="salary">Введите вашу зарплату (руб):</label>
-        <input type="number" id="salary" placeholder="30000">
         
+        <label for="currency">Выберите валюту:</label>
+        <select id="currency">
+            <option value="руб.">Рубль</option>
+            <option value="$">Доллар США</option>
+            <option value="€">Евро</option>
+            <option value="¥">Йена</option>
+        </select>
+
+        <label for="salary">Введите вашу зарплату:</label>
+        <input type="number" id="salary" placeholder="30000">
+
         <label for="payday">Дата следующей зарплаты:</label>
         <input type="date" id="payday">
-        
-        <label for="spent">Сколько вы потратили сегодня (руб):</label>
+
+        <label for="spent">Сколько вы потратили сегодня:</label>
         <input type="number" id="spent" placeholder="0">
-        
+
         <button onclick="calculateBudget()">Рассчитать бюджет</button>
 
         <h3 id="daily-limit">Дневной лимит: </h3>
         <h3 id="remaining">Остаток: </h3>
+
+        <h3>История трат:</h3>
+        <ul id="expense-history"></ul>
+
+        <canvas id="expenseChart" width="400" height="200"></canvas> <!-- График для отображения расходов -->
     </div>
 
     <script>
@@ -55,6 +73,8 @@
         let salary = 0;
         let dailyLimit = 0;
         let remaining = 0;
+        let expenseHistory = JSON.parse(localStorage.getItem('expenseHistory')) || [];
+        let currency = localStorage.getItem('currency') || "руб.";
 
         // Загружаем данные из localStorage при загрузке страницы
         window.onload = function() {
@@ -75,6 +95,9 @@
             if (salary && document.getElementById("payday").value) {
                 calculateBudget(true);  // Обновляем бюджет с учётом сохранённых данных
             }
+
+            document.getElementById("currency").value = currency;  // Установка валюты
+            showHistory();  // Отображение истории трат
         };
 
         // Функция для расчета бюджета
@@ -83,6 +106,7 @@
             let payday = new Date(document.getElementById("payday").value);
             let spentToday = parseFloat(document.getElementById("spent").value);
             let today = new Date();
+            currency = document.getElementById("currency").value;
             
             // Рассчитываем количество оставшихся дней до зарплаты
             let totalDays = Math.ceil((payday - today) / (1000 * 60 * 60 * 24));
@@ -96,28 +120,81 @@
             // Сохраняем зарплату и дату следующей зарплаты в localStorage
             localStorage.setItem("salary", salary);
             localStorage.setItem("payday", document.getElementById("payday").value);
+            localStorage.setItem("currency", currency);  // Сохраняем валюту
 
             // Если мы не пропускаем ввод расходов, добавляем потраченную сегодня сумму
             if (!skipSpend && !isNaN(spentToday)) {
                 totalSpent += spentToday;
                 localStorage.setItem("totalSpent", totalSpent);  // Сохраняем общие расходы
+                saveExpense(spentToday);  // Сохраняем траты в истории
             }
 
             // Рассчитываем остаток и дневной лимит
             remaining = salary - totalSpent;
             dailyLimit = remaining / totalDays;
-            
+
             // Проверка на перерасход
             if (spentToday > dailyLimit) {
                 alert("Внимание! Вы потратили больше, чем дневной лимит.");
             }
-            
+
             // Обновляем отображаемую информацию
-            document.getElementById("daily-limit").textContent = "Дневной лимит: " + dailyLimit.toFixed(2) + " руб.";
-            document.getElementById("remaining").textContent = "Остаток: " + remaining.toFixed(2) + " руб.";
+            document.getElementById("daily-limit").textContent = `Дневной лимит: ${dailyLimit.toFixed(2)} ${currency}`;
+            document.getElementById("remaining").textContent = `Остаток: ${remaining.toFixed(2)} ${currency}`;
 
             // Обнуляем поле ввода трат
             document.getElementById("spent").value = '';
+
+            // Обновляем график
+            updateChart();
+        }
+
+        // Сохраняем траты в историю
+        function saveExpense(amount) {
+            let date = new Date().toLocaleDateString();
+            expenseHistory.push({date: date, amount: amount});
+            localStorage.setItem('expenseHistory', JSON.stringify(expenseHistory));
+            showHistory();
+        }
+
+        // Отображаем историю трат
+        function showHistory() {
+            let historyList = document.getElementById("expense-history");
+            historyList.innerHTML = '';
+            expenseHistory.forEach(expense => {
+                let li = document.createElement("li");
+                li.textContent = `Дата: ${expense.date}, Сумма: ${expense.amount} ${currency}`;
+                historyList.appendChild(li);
+            });
+        }
+
+        // Инициализация графика расходов
+        const ctx = document.getElementById('expenseChart').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: expenseHistory.map(e => e.date),
+                datasets: [{
+                    label: 'Расходы',
+                    data: expenseHistory.map(e => e.amount),
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Обновление данных графика
+        function updateChart() {
+            chart.data.labels = expenseHistory.map(e => e.date);
+            chart.data.datasets[0].data = expenseHistory.map(e => e.amount);
+            chart.update();
         }
     </script>
 </body>
